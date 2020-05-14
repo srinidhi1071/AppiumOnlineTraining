@@ -107,7 +107,7 @@ public class DemoDriverRotatetest {
     	
 	}
 	
-	@Test(enabled = true)
+	@Test(enabled = false)
 	public void tc_TapTest() throws Exception {
 		
 		DesiredCapabilities cap=new DesiredCapabilities();
@@ -125,5 +125,25 @@ public class DemoDriverRotatetest {
 		AndroidDriver driver = new AndroidDriver(new URL("http://localhost:4723/wd/hub"), cap);
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		driver.tap(1, driver.findElementByAccessibilityId("Views"), 50);
+	}
+	
+	@Test(enabled = true)
+	public void tc_TapOnCoOrdinates() throws Exception {
+		
+		DesiredCapabilities cap=new DesiredCapabilities();
+		cap.setCapability(MobileCapabilityType.DEVICE_NAME, "Lenovo K8 Plus");
+		cap.setCapability(MobileCapabilityType.UDID, "HNB3B18T");
+		cap.setCapability(MobileCapabilityType.PLATFORM_NAME, "Android");
+		cap.setCapability(MobileCapabilityType.PLATFORM_VERSION, "7.1.1");
+		cap.setCapability(MobileCapabilityType.AUTOMATION_NAME, "appium");
+		cap.setCapability(MobileCapabilityType.NO_RESET, true);
+		//cap.setCapability(MobileCapabilityType.FULL_RESET, true);
+		
+		cap.setCapability(MobileCapabilityType.APP,"G:\\Apkapp\\ApiDemos.apk");
+
+		
+		AndroidDriver driver = new AndroidDriver(new URL("http://localhost:4723/wd/hub"), cap);
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		driver.tap(1, 159, 1788, 50);
 	}
 }
