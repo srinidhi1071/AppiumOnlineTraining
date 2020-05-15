@@ -1,0 +1,33 @@
+package com.tyss.appiumproject;
+
+import java.net.MalformedURLException;
+import java.net.URL;
+
+import org.openqa.selenium.Dimension;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.testng.annotations.Test;
+
+import io.appium.java_client.android.AndroidDriver;
+
+public class Swipe {
+		@Test
+	public void tc_swipeoperation() throws MalformedURLException, InterruptedException {
+		DesiredCapabilities cap = new DesiredCapabilities();
+		cap.setCapability("deviceName", "vivo  1716");
+		cap.setCapability("platformName", "android");
+		cap.setCapability("platformVersion", "8");
+		cap.setCapability("automationName", "appium");
+		cap.setCapability("appPackage", "io.appium.android.apis");
+		cap.setCapability("appActivity", "ApiDemos");
+		AndroidDriver driver = new AndroidDriver(new URL("http://localhost:4723/wd/hub"), cap);
+		WebElement element = driver.findElementByAndroidUIAutomator("text(\"Views\")");
+		driver.tap(1, element, 500);		
+		Dimension dim = driver.manage().window().getSize();
+		int startx = dim.getWidth()/2;
+		int starty = (int)(dim.getHeight()*0.80);
+		int endx = startx;
+		int endy = (int)(dim.getHeight()*0.20);
+		driver.swipe(startx, starty, endx, endy, 1000);
+	}
+}
