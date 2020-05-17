@@ -1,0 +1,44 @@
+package android_appTest;
+
+import static org.testng.Assert.assertTrue;
+
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.concurrent.TimeUnit;
+
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.testng.Assert;
+import org.testng.annotations.Test;
+
+import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.android.AndroidKeyCode;
+
+public class TestAppBB 
+{
+	@Test
+	public void openApp() throws MalformedURLException, InterruptedException 
+	{
+	DesiredCapabilities cap=new DesiredCapabilities();
+	cap.setCapability("deviceName","RedmiNote7Pro");
+	cap.setCapability("platformName", "android");
+	cap.setCapability("platformVersion", "9");
+	cap.setCapability("automationName", "appium");
+	cap.setCapability("appPackage", "com.bigbasket.mobileapp");
+	cap.setCapability("appActivity","activity.SplashActivity");
+	cap.setCapability("noReset","true");
+	AndroidDriver driver =new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"),cap);
+	driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+	Thread.sleep(2000);
+	driver.findElementById("com.bigbasket.mobileapp:id/homePageSearchBox").click();
+	Thread.sleep(2000);
+	driver.findElementById("com.bigbasket.mobileapp:id/searchView").sendKeys("Mangoes");
+	Thread.sleep(2000);
+	driver.pressKeyCode(AndroidKeyCode.KEYCODE_ENTER);
+	Thread.sleep(2000);
+	String [] actitems=driver.findElementById("com.bigbasket.mobileapp:id/txtProductCount").getText().split(" ");
+	System.out.println("The actual no. of items: "+Integer.parseInt(actitems[0]));
+	Assert.assertTrue(Integer.parseInt (actitems[0])>140);
+	
+	}
+}

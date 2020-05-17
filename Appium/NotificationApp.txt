@@ -1,0 +1,42 @@
+package android_appTest;
+
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.concurrent.TimeUnit;
+
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.testng.annotations.Test;
+
+import io.appium.java_client.android.AndroidDriver;
+
+public class AppNotification
+{
+	@Test
+	public void notification() throws MalformedURLException, InterruptedException 
+	{
+	DesiredCapabilities cap=new DesiredCapabilities();
+	cap.setCapability("deviceName","RedmiNote7Pro");
+	cap.setCapability("platformName", "android");
+	cap.setCapability("platformVersion", "9");
+	cap.setCapability("automationName", "appium");
+	cap.setCapability("appPackage", "com.bhanu.notificationreminders");
+	cap.setCapability("appActivity","MainDrawerActivity");
+	cap.setCapability("noReset","true");
+	cap.setCapability("uiautomator2ServerInstallTimeout",80000);
+	AndroidDriver driver =new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"),cap);
+	driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+	driver.findElementById("com.bhanu.notificationreminders:id/txtNewNoteTitle").sendKeys("testdata");
+	Thread.sleep(2000);
+	driver.findElementById("com.bhanu.notificationreminders:id/txtNewNoteText").sendKeys("testdata1");
+	Thread.sleep(2000);
+	driver.findElementById("com.bhanu.notificationreminders:id/btnNotify").click();
+	Thread.sleep(2000);
+	driver.openNotifications();
+	driver.findElementByXPath("/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout[1]/"
+			+ "android.widget.FrameLayout/android.widget.ScrollView/android.widget.FrameLayout[1]/"
+			+ "android.widget.FrameLayout[1]/android.widget.FrameLayout/android.widget.LinearLayout/"
+			+ "android.widget.LinearLayout/android.widget.LinearLayout/android.widget.TextView\r\n" + 
+			"").click();
+	Thread.sleep(3000);
+}
+}
