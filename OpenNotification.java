@@ -26,6 +26,7 @@ public class OpenNotification
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		Thread.sleep(3000);
 		driver.findElementById("com.bhanu.notificationreminders:id/txtNewNoteTitle").sendKeys("testdata1");
+		Thread.sleep(3000);
 		driver.findElementById("com.bhanu.notificationreminders:id/btnNotify").click();
 		Thread.sleep(3000);
 		driver.openNotifications();
