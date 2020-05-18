@@ -28,6 +28,7 @@ public class demoApp3 {
 			driver.findElementById("com.miui.calculator:id/btn_9_s").click();
 			driver.findElementById("com.miui.calculator:id/btn_equal_s").click();
 			Thread.sleep(3000);
+			System.out.println("success dudeee");
 			
 		}
 

@@ -2,6 +2,7 @@ package com.tyss.appium;
 
 import java.net.URL;
 
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.annotations.Test;
 
@@ -22,7 +23,12 @@ public class demoApp2 {
 			cap.setCapability(MobileCapabilityType.APP, "C:\\Users\\123\\Downloads\\SHAREit\\Redmi Note 4\\file\\ApiDemos.apk");
 			
 			AndroidDriver driver = new AndroidDriver(new URL("http://localhost:4723/wd/hub"), cap);
-			driver.tap(1, driver.findElementByAccessibilityId("Views"), 500);
+			driver.findElementByAccessibilityId("Views").click();
+			Thread.sleep(3000);
+			//driver.tap(1, viewsMenu , 500);
+			//Thread.sleep(3000);
+			//driver.tap(1, 131, 1771, 500);
+			driver.swipe(281, 1403, 186, 269, 1000);
 			
 			
 		}

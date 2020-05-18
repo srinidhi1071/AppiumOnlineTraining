@@ -51,7 +51,7 @@ public class demoapp5 {
 		cap.setCapability(MobileCapabilityType.NO_RESET, true);
 		//cap.setCapability(MobileCapabilityType.FULL_RESET, true);
 		
-		cap.setCapability(MobileCapabilityType.APP,"\\\\Users\\\\123\\\\Downloads\\\\SHAREit\\\\Redmi Note 4\\\\file\\\\ApiDemos.apk");
+		cap.setCapability(MobileCapabilityType.APP,"C:\\Users\\123\\Downloads\\SHAREit\\Redmi Note 4\\file\\ApiDemos.apk");
 
 		
 		AndroidDriver driver = new AndroidDriver(new URL("http://localhost:4723/wd/hub"), cap);
