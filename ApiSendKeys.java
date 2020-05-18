@@ -32,7 +32,7 @@ public class ApiSendKeys
 		driver.findElementByAccessibilityId("3. Holo Light Theme").click();
 		driver.findElementByAccessibilityId("io.appium.android.apis:id/edit").sendKeys("TestData");
 		Thread.sleep(2000);
-		Thread.sleep(2000);
+		
 		
 }
 
