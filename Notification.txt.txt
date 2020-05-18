@@ -1,0 +1,37 @@
+package com.tyss.appiumproject.test;
+
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.concurrent.TimeUnit;
+
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.testng.annotations.Test;
+
+import io.appium.java_client.android.AndroidDriver;
+
+public class DemoApp_5 {
+
+	@Test
+	public void tc_openapp() throws MalformedURLException, InterruptedException
+	{
+		DesiredCapabilities cap = new DesiredCapabilities();
+		cap.setCapability("deviceName", "Moto E(4) Plus");
+		cap.setCapability("platformName", "android");
+		cap.setCapability("platformVersion", 7);
+		cap.setCapability("automationName", "appium");
+		cap.setCapability("appPackage", "thomas.jonathan.notey");
+		cap.setCapability("appActivity", "MainActivity");
+		cap.setCapability("noReset", true);
+		cap.setCapability("uiautomator2serverInstallTimeout", 40000);
+		AndroidDriver driver = new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"), cap);
+		driver.manage().timeouts().implicitlyWait(40, TimeUnit.SECONDS);
+		driver.findElementByXPath("/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/"
+				+ "android.widget.FrameLayout/android.widget.RelativeLayout/android.widget."
+		+ "RelativeLayout[3]/android.widget.FrameLayout/android.widget.EditText").sendKeys("A");
+		driver.findElementByXPath("/hierarchy/android.widget.FrameLayout/android.widget."
+		+ "FrameLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.view.View[2]")
+		.click();
+		driver.openNotifications();
+		driver.findElementByAccessibilityId("Edit").click();
+	}
+}
