@@ -1,0 +1,50 @@
+package com.tyss.appiumproject;
+
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.concurrent.TimeUnit;
+
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.testng.annotations.Test;
+
+import io.appium.java_client.android.AndroidDriver;
+
+public class TouchSreenTest1 {
+	@Test
+	public void tc_test() throws MalformedURLException, InterruptedException {
+		DesiredCapabilities cap = new DesiredCapabilities();
+		cap.setCapability("deviceName", "vivo  1716");
+		cap.setCapability("platformName", "android");
+		cap.setCapability("platformVersion", "8");
+		cap.setCapability("automationName", "appium");
+		cap.setCapability("appPackage", "jp.rallwell.siriuth.touchscreentest");
+		cap.setCapability("appActivity", "TouchScreenTestActivity");
+		AndroidDriver driver = new AndroidDriver(new URL("http://localhost:4723/wd/hub"), cap);
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		WebElement surface = driver.findElementById("jp.rallwell.siriuth.touchscreentest:id/surfaceView");
+		int startx = (int)(surface.getSize().getWidth()*0.20);
+		int starty = (int)(surface.getSize().getHeight()*0.20);
+		int endx = (int)(surface.getSize().getWidth()*0.80);
+		int endy = starty;
+		driver.swipe(startx, starty, endx, endy, 1000);
+		
+		int startx1 = endx;
+		int starty1 = endy;
+		int endx1 = endx;
+		int endy1 = (int)(surface.getSize().getHeight()*0.80);
+		driver.swipe(startx1 , starty1, endx ,endy1, 1000);
+		
+		int startx2 = endx;
+		int starty2 = endy1;
+		int endx2 = (int)(surface.getSize().getWidth()*0.20);
+		int endy2 = starty2;
+		driver.swipe(startx2, starty2, endx2, endy2, 1000);
+		
+		int startx3 = endx2 ;
+		int starty3 = endy2;
+		int endx3 = startx;
+		int endy3 = starty;
+		driver.swipe(startx3 , starty3 , startx ,starty , 1000);
+	}
+}
