@@ -3,16 +3,15 @@ package demo;
 import java.net.URL;
 import java.util.concurrent.TimeUnit;
 
-import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.annotations.Test;
 
 import io.appium.java_client.android.AndroidDriver;
 
-public class Tapp {
+public class AndriodUIAutomatorLocator {
 	@Test
-	public void appium_demo1() throws Exception {
+	public void appium_demo7() throws Exception {
 		DesiredCapabilities cap = new DesiredCapabilities();
 		// To set the Device name
 		cap.setCapability("deviceName", "motorola one vision");
@@ -31,20 +30,12 @@ public class Tapp {
 		// To communicate with the server
 		AndroidDriver driver = new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"), cap);
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-		// To click on the View button the Homepage
-		// driver.findElement(By.xpath("//android.widget.TextView[@content-desc=\"Views\"]")).click();
-		// To click on the control button
-		WebElement views = driver.findElementByAccessibilityId("Views");
-		Thread.sleep(2000);
-		driver.tap(1, 144, 1889, 500);
-
-		Dimension dim = driver.manage().window().getSize();
-		int startX=dim.getWidth()/2;
-		int startY=(int)(dim.getHeight()*0.08);
-		int endX = startX;
-		int endY=(int)(dim.getHeight()*0.02);
-		
-
+		// To find the View button the Homepage using AndroidUIAutomator locator
+		WebElement viewMenu = driver.findElementByAndroidUIAutomator("text(\"Views\")");
+		//To click on the ViewMenu button
+		driver.tap(1, viewMenu, 500);
+		//Swipe to particular element using AndroidUIAutomator
+		driver.findElementByAndroidUIAutomator("new UiScrollable(new UiSelector()).scrollIntoView(text(\"Views\"))");
 	}
 
 }

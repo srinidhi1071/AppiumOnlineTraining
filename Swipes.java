@@ -10,7 +10,7 @@ import org.testng.annotations.Test;
 
 import io.appium.java_client.android.AndroidDriver;
 
-public class Tapp {
+public class Swipes {
 	@Test
 	public void appium_demo1() throws Exception {
 		DesiredCapabilities cap = new DesiredCapabilities();
@@ -35,14 +35,17 @@ public class Tapp {
 		// driver.findElement(By.xpath("//android.widget.TextView[@content-desc=\"Views\"]")).click();
 		// To click on the control button
 		WebElement views = driver.findElementByAccessibilityId("Views");
+		driver.tap(1, views, 500);
 		Thread.sleep(2000);
-		driver.tap(1, 144, 1889, 500);
-
 		Dimension dim = driver.manage().window().getSize();
-		int startX=dim.getWidth()/2;
-		int startY=(int)(dim.getHeight()*0.08);
+
+		int startX = dim.getWidth() / 2;
+		int startY = (int) (dim.getHeight() * 0.08);
+
 		int endX = startX;
-		int endY=(int)(dim.getHeight()*0.02);
+		int endY = (int) (dim.getHeight() * 0.02);
+
+		driver.swipe(startX, startY, endX, endY, 2000);
 		
 
 	}
