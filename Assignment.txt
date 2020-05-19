@@ -1,0 +1,54 @@
+package android_appTest;
+
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.concurrent.TimeUnit;
+
+import org.openqa.selenium.Point;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.testng.annotations.Test;
+
+import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.android.AndroidKeyCode;
+
+public class CameraTest
+{
+	@Test
+	public void openApp() throws MalformedURLException, InterruptedException 
+	{
+	DesiredCapabilities cap=new DesiredCapabilities();
+	cap.setCapability("deviceName","RedmiNote7Pro");
+	cap.setCapability("platformName", "android");
+	cap.setCapability("platformVersion", "9");
+	cap.setCapability("automationName", "appium");
+	cap.setCapability("appPackage", "com.android.camera");
+	cap.setCapability("appActivity","Camera");
+	cap.setCapability("noReset","true");
+	AndroidDriver driver =new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"),cap);
+	driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+	
+	WebElement filter=driver.findElementByAccessibilityId("Opened filter menu");
+	driver.tap(1, filter, 500);
+	WebElement sun=driver.findElementByXPath("//android.widget.RelativeLayout[@index=5]");
+	driver.tap(1, sun, 500);
+	Point loc=sun.getLocation();
+	int startx=loc.getX();
+	int starty=loc.getY();
+	int endx=(int)(sun.getSize().getWidth()*0.100);
+	int endy=startx;
+	driver.swipe(startx, starty, endx, endy, 1000);
+	
+	WebElement glow=driver.findElementByXPath("//android.widget.RelativeLayout[@index=5]");
+	driver.tap(1, glow, 500);
+	
+	WebElement filter1=driver.findElementByAccessibilityId("Opened filter menu");
+	driver.tap(1, filter1, 500);
+	
+	driver.pressKeyCode(AndroidKeyCode.KEYCODE_CAMERA);
+	
+	
+	
+	
+}
+}
