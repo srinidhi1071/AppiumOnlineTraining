@@ -33,7 +33,9 @@ public class ApiDemosRatingBar {
 		driver.tap(1,ratingbar, 500);
 		Thread.sleep(3000);
 		WebElement ratingtab = driver.findElementById("io.appium.android.apis:id/ratingbar2");
-		driver.tap(1, 504, 484, 500);
+		int x=(int) (ratingtab.getSize().getWidth()*0.7);
+		int y=x;
+		driver.tap(1, x, y, 500);
 		Thread.sleep(2000);
 		String ratingvalue = driver.findElementById("io.appium.android.apis:id/rating").getText();
 		System.out.println(ratingvalue);
