@@ -1,18 +1,17 @@
 package demo;
 
 import java.net.URL;
-import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Point;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.annotations.Test;
 
-import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
 
-public class XpathByClassName {
+public class RatingBar {
 	@Test
 	public void appium_demo7() throws Exception {
 		DesiredCapabilities cap = new DesiredCapabilities();
@@ -37,27 +36,18 @@ public class XpathByClassName {
 		WebElement viewMenu = driver.findElement(By.xpath("//android.widget.TextView[@text='Views']"));
 		// To click on the ViewMenu
 		driver.tap(1, viewMenu, 500);
-		// To fiind the ControlMenu
-		WebElement controlMenu = driver.findElement(By.xpath("//android.widget.TextView[@index='4']"));
-		// To click on the control button
-		driver.tap(1, controlMenu, 500);
-		// To find the Holo light Theme
-		WebElement holoLightTheme = driver
-				.findElement(By.xpath("//android.widget.TextView[@content-desc='3. Holo Light Theme']"));
-		driver.tap(1, holoLightTheme, 500);
-		// To hide the Keyboard
-		driver.hideKeyboard();
-		// To find the dropdown menu option
-		WebElement dropDown = driver.findElement(By.xpath("//android.widget.TextView[@text='Mercury']"));
-		driver.tap(1, dropDown, 500);
-		// To get the all the option in the menu
-		List<MobileElement> dropDownMenu = driver.findElements(By.xpath("//android.widget.CheckedTextView"));
-		// To print the dropdown options
-		Thread.sleep(2000);
-		for (MobileElement ele : dropDownMenu) {
-			System.out.println(ele.getText());
+		driver.findElementByAndroidUIAutomator(
+				"new UiScrollable(new UiSelector()).scrollIntoView(text(\"Rating Bar\"))").click();
+		WebElement rating = driver.findElement(By.id("io.appium.android.apis:id/ratingbar2"));
+		Point loc = rating.getLocation();
+		int startX = loc.getX();
+		int startY = loc.getY();
+		int endX = (int) (rating.getSize().getWidth() * 0.65);
+		int endY = startY;
+		driver.swipe(startX, startY, endX, endY, 1000);
 
-		}
+		WebElement rating_text = driver.findElement(By.id("io.appium.android.apis:id/rating"));
+		System.out.println(rating_text.getText());
 	}
 
 }

@@ -38,7 +38,7 @@ public class SeekBar {
 		//To click on the ViewMenu button
 		driver.tap(1, viewMenu, 500);
 		//Swipe to particular element using AndroidUIAutomator
-		driver.findElementByAndroidUIAutomator("new UiScrollable(new UiSelector()).scrollIntoView(text(\"Seek Bar\"))").click();;
+		driver.findElementByAndroidUIAutomator("new UiScrollable(new UiSelector()).scrollIntoView(text(\"Seek Bar\"))").click();
 	    WebElement seek_bar = driver.findElement(By.id("io.appium.android.apis:id/seek"));
 	   Point loc = seek_bar.getLocation();
 	   int startX = loc.getX();
