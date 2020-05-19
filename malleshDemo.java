@@ -28,6 +28,5 @@ public class malleshDemo {
    WebElement view = driver.findElementByAccessibilityId("Views");
    driver.tap(1, view, 1000);
    driver.swipe(281, 1403, 281, 269, 1000);
-
 }
 }
