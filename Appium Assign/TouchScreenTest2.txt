@@ -1,0 +1,47 @@
+package android_appTest;
+
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.concurrent.TimeUnit;
+
+import org.openqa.selenium.Dimension;
+import org.openqa.selenium.Point;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.testng.annotations.Test;
+
+import io.appium.java_client.android.AndroidDriver;
+
+public class TouchScreenTest2
+{
+	@Test
+	public void openApp() throws MalformedURLException, InterruptedException 
+	{
+	DesiredCapabilities cap=new DesiredCapabilities();
+	cap.setCapability("deviceName","RedmiNote7Pro");
+	cap.setCapability("platformName", "android");
+	cap.setCapability("platformVersion", "9");
+	cap.setCapability("automationName", "appium");
+	cap.setCapability("appPackage", "jp.rallwell.siriuth.touchscreentest");
+	cap.setCapability("appActivity","TouchScreenTestActivity");
+	cap.setCapability("noReset","true");
+	AndroidDriver driver =new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"),cap);
+	driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+	Thread.sleep(2000);
+	WebElement screen=driver.findElementById("jp.rallwell.siriuth.touchscreentest:id/surfaceView");
+	Point loc=screen.getLocation();
+	
+	Dimension dim=driver.manage().window().getSize();
+	int startx=(int)(screen.getSize().getWidth()*0.10);
+	int starty=startx;
+	int endx=startx;
+	int endy=(int)(dim.getHeight()*0.90);
+	driver.swipe(startx, starty, endx, endy, 1000);
+	
+	startx=(int)(screen.getSize().getWidth()*0.10);
+	starty=(int)(dim.getHeight()*0.90);
+	endx=(int)(screen.getSize().getWidth()*0.90);
+	endy=(int)(dim.getHeight()*0.90);
+	driver.swipe(startx, starty, endx, endy, 1000);
+}
+}
