@@ -11,11 +11,10 @@ import org.testng.annotations.Test;
 
 import io.appium.java_client.android.AndroidDriver;
 
-public class MobileTap 
+public class StarAssignmentApi 
 {
 	@Test
-	public void tc_tapandSwipe
-	() throws MalformedURLException, InterruptedException
+	public void tc_StarTap() throws MalformedURLException, InterruptedException
 	{
 		DesiredCapabilities cap=new DesiredCapabilities();
 		cap.setCapability("deviceName", "SamsungA8+");
@@ -42,7 +41,15 @@ public class MobileTap
 		int endy = (int)(dim.getHeight()*0.20);
 		
 		driver.swipe(startx, starty, endx, endy, 1000);
+		Thread.sleep(2000);
+		driver.findElementByAccessibilityId("Rating Bar").click();
+		Thread.sleep(2000);
+		driver.findElementById("io.appium.android.apis:id/ratingbar2").click();
+		Thread.sleep(2000);
+		String starText = driver.findElementById("io.appium.android.apis:id/rating").getText();
+		System.out.println("getting the star content--->"+starText);
+		
 		
 }
-}
 
+}

@@ -24,6 +24,7 @@ public class ApiRotation
 		cap.setCapability("appPackage", "io.appium.android.apis");
 		cap.setCapability("appActivity", "ApiDemos");
 		cap.setCapability("noReset", true);
+//		cap.setCapability("uiautomator2ServerInstallTimeout", 40000);
 		AndroidDriver driver=new AndroidDriver(new URL("http://0.0.0.0:4723/wd/hub"),cap);
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		

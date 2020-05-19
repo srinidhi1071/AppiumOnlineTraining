@@ -21,6 +21,7 @@ public class ApinoReset
 		cap.setCapability("automationName", "appium");
 		//cap.setCapability("noReset", true);
 		//cap.setCapability("fullReset", true);
+//		cap.setCapability("uiautomator2ServerInstallTimeout", 40000);
 		cap.setCapability(MobileCapabilityType.APP, "C:\\Users\\Den\\Desktop\\APK\\ApiDemos.apk");
 		AndroidDriver driver=new AndroidDriver(new URL("http://0.0.0.0:4723/wd/hub"),cap);
 		

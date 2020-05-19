@@ -24,6 +24,7 @@ public class ApiSendKeys
 		cap.setCapability("appActivity", "ApiDemos");
 //		cap.setCapability("noReset", true);
 //		cap.setCapability("fullReset", true);
+//		cap.setCapability("uiautomator2ServerInstallTimeout", 40000);
 //		cap.setCapability(MobileCapabilityType.APP, "C:\\Users\\Den\\Desktop\\APK\\ApiDemos.apk");
 		AndroidDriver driver=new AndroidDriver(new URL("http://0.0.0.0:4723/wd/hub"),cap);
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
@@ -31,7 +32,7 @@ public class ApiSendKeys
 		driver.findElementByAccessibilityId("Controls").click();
 		driver.findElementByAccessibilityId("3. Holo Light Theme").click();
 		driver.findElementByAccessibilityId("io.appium.android.apis:id/edit").sendKeys("TestData");
-		Thread.sleep(2000);
+	
 		
 		
 }
