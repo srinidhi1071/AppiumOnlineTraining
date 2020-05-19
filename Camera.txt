@@ -1,0 +1,72 @@
+package com.tyss.appiumproject;
+
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.concurrent.TimeUnit;
+
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.testng.annotations.Test;
+
+import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.android.AndroidKeyCode;
+
+public class Camera {
+	@Test
+	public void tc_cameraoperations() throws MalformedURLException, InterruptedException {
+		DesiredCapabilities cap = new DesiredCapabilities();
+		cap.setCapability("deviceName", "vivo  1716");
+		cap.setCapability("platformName", "android");
+		cap.setCapability("platformVersion", "8");
+		cap.setCapability("automationName", "appium");
+		cap.setCapability("appPackage", "com.android.camera");
+		cap.setCapability("appActivity", "Camera");
+		cap.setCapability("noReset",true);
+		AndroidDriver driver = new AndroidDriver(new URL("http://localhost:4723/wd/hub"), cap);
+		driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS);
+		driver.pressKeyCode(AndroidKeyCode.KEYCODE_CAMERA);
+		Thread.sleep(3000);
+		WebElement element = driver.findElementById("com.android.camera:id/camera_switch");
+		driver.tap(1, element,500);
+		driver.pressKeyCode(AndroidKeyCode.KEYCODE_CAMERA);
+		Thread.sleep(3000);
+		driver.tap(1, element,500);
+		WebElement flash = driver.findElementByAccessibilityId("Flash off");
+		driver.tap(1, flash,500);
+		WebElement off = driver.findElementByXPath("//android.widget.RadioButton[@index='2']");
+		driver.tap(1, off,500);
+		driver.pressKeyCode(AndroidKeyCode.KEYCODE_CAMERA);
+		Thread.sleep(3000);
+		WebElement settings = driver.findElementByAccessibilityId("Settings");
+		driver.tap(1, settings,500);
+		WebElement timeWatermark = driver.findElementByXPath("//android.widget.CheckBox[@text='Time watermark']");
+		driver.tap(1, timeWatermark,500);
+		driver.pressKeyCode(AndroidKeyCode.KEYCODE_CAMERA);
+		Thread.sleep(3000);
+		driver.tap(1, settings,500);
+		WebElement sound = driver.findElementByXPath("//android.widget.CheckBox[@text='Sound']");
+		driver.tap(1, sound,500);
+		driver.pressKeyCode(AndroidKeyCode.KEYCODE_CAMERA);
+		WebElement watermark = driver.findElementById("com.android.camera:id/gourmet_watermark");
+		driver.tap(1, watermark,500);
+		WebElement grapefruit = driver.findElementByXPath("//android.view.View[@index='2']");
+		driver.tap(1, grapefruit,500);
+		driver.pressKeyCode(AndroidKeyCode.KEYCODE_CAMERA);
+		Thread.sleep(3000);
+		driver.tap(1, watermark,500);
+		WebElement photomenu = driver.findElementById("com.android.camera:id/mode_indicator_text_list");
+		int startx = photomenu.getLocation().getX();
+		int starty = photomenu.getLocation().getY();
+		System.out.println(startx);
+		System.out.println(starty);
+		int endx = (int)(photomenu.getSize().getWidth()*0.80);
+		System.out.println(endx);
+		int endy = starty;
+		driver.swipe(endx,endy,startx,starty,1000);
+		driver.pressKeyCode(AndroidKeyCode.KEYCODE_CAMERA);
+		Thread.sleep(3000);
+		driver.pressKeyCode(AndroidKeyCode.KEYCODE_CAMERA);
+		
+		
+	}
+}
