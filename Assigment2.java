@@ -38,13 +38,16 @@ public class Assigment2 {
 		  driver.findElementByAndroidUIAutomator("new UiScrollable(new UiSelector()).scrollIntoView(text(\"Rating Bar\"))").click();
 		  
 		 WebElement ratingelement = driver.findElement(By.id("io.appium.android.apis:id/ratingbar2"));
+		 
+		
 		Point loc = ratingelement.getLocation();
 		
 		int startx=loc.getX();
 		int starty=loc.getY();
 		int endx=(int)(ratingelement.getSize().getWidth()*0.7);
 		int endy=starty;
-		driver.swipe(startx, starty, endx, endy, 1000);
+		driver.tap(1, endx, endy, 1000);
+		//driver.swipe(startx, starty, endx, endy, 1000);
 		Thread.sleep(3000);
 		String ratingmsg = driver.findElement(By.id("io.appium.android.apis:id/rating")).getText();
 		
@@ -52,4 +55,6 @@ public class Assigment2 {
 		Assert.assertEquals(ratingmsg, "Rating: 3.5/5");
 		 
 	}
+
+
 }
