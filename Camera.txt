@@ -1,0 +1,27 @@
+@Test
+public class DemoApp_8 {
+
+	public void tc_openapp() throws MalformedURLException, InterruptedException
+	{
+		DesiredCapabilities cap = new DesiredCapabilities();
+		cap.setCapability("deviceName", "Moto E(4) Plus");
+		cap.setCapability("platformName", "android");
+		cap.setCapability("platformVersion", 7);
+		cap.setCapability("automationName", "appium");
+		cap.setCapability("appPackage", "com.motorola.camera");
+		cap.setCapability("appActivity", "Camera");
+		cap.setCapability("noReset", true);
+		cap.setCapability("uiautomator2serverInstallTimeout", 40000);
+		AndroidDriver driver = new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"), cap);
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		// switching camera to secondary camera
+		WebElement frontcam = driver.findElementById("com.motorola.camera:id/v8_camera_picker");
+		driver.tap(1, frontcam, 500);
+		driver.pressKeyCode(AndroidKeyCode.KEYCODE_CAMERA);
+		
+		//flashlight
+		WebElement flashlight = driver.findElementById("com.motorola.camera:id/top_alert_container");
+		driver.tap(1, flashlight, 500);
+		driver.pressKeyCode(AndroidKeyCode.KEYCODE_CAMERA);
+	}
+}
