@@ -1,0 +1,51 @@
+package com.tyss.appiumproject;
+
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
+
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.testng.Assert;
+import org.testng.annotations.Test;
+
+import io.appium.java_client.MobileElement;
+import io.appium.java_client.android.AndroidDriver;
+
+public class StopWatch {
+	@Test
+	public void tc_stopwatchoperation() throws MalformedURLException, InterruptedException {
+		DesiredCapabilities cap = new DesiredCapabilities();
+		cap.setCapability("deviceName", "vivo  1716");
+		cap.setCapability("platformName", "android");
+		cap.setCapability("platformVersion", "8");
+		cap.setCapability("automationName", "appium");
+		cap.setCapability("appPackage", "com.android.BBKClock");
+		cap.setCapability("appActivity", "Timer");
+		cap.setCapability("noReset",true);
+		AndroidDriver driver = new AndroidDriver(new URL("http://localhost:4723/wd/hub"), cap);
+		driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS);
+		WebElement stopwatch = driver.findElementByXPath("//android.widget.TextView[@text='Stopwatch']");
+		driver.tap(1, stopwatch, 500);
+		WebElement startBtn = driver.findElementByXPath("//android.widget.Button[@text='Start']");
+		driver.tap(1, startBtn, 500);
+		WebElement timer1 = driver.findElementById("com.android.BBKClock:id/minute_0");
+		WebElement timer2 = driver.findElementById("com.android.BBKClock:id/minute_1");
+		WebElement timer3 = driver.findElementById("com.android.BBKClock:id/minute_dot");
+		WebElement timer4 = driver.findElementById("com.android.BBKClock:id/second_0");
+		WebElement timer5 = driver.findElementById("com.android.BBKClock:id/second_1");
+		WebElement timer6 = driver.findElementById("com.android.BBKClock:id/m_second_0");
+		WebElement timer7 = driver.findElementById("com.android.BBKClock:id/m_second_1");
+		WebElement timer8 = driver.findElementById("com.android.BBKClock:id/m_second_2");
+		String text1 = timer1.getText()+timer2.getText()+timer3.getText()+timer4.getText()+timer5.getText()+timer6.getText()+timer7.getText()+timer8.getText();
+		System.out.println("Before running in background : "+text1);
+		driver.runAppInBackground(10);
+		WebElement stopBtn = driver.findElementByXPath("//android.widget.Button[@text='Stop']");
+		driver.tap(1, stopBtn, 500);
+		String text2 = timer1.getText()+timer2.getText()+timer3.getText()+timer4.getText()+timer5.getText()+timer6.getText()+timer7.getText()+timer8.getText();
+		System.out.println("After running in background : "+text2);
+		Assert.assertNotEquals(text1, text2);
+		
+	}
+}
