@@ -1,0 +1,53 @@
+package android_appTest;
+
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.concurrent.TimeUnit;
+
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.testng.annotations.Test;
+
+import io.appium.java_client.android.AndroidDriver;
+
+public class StopWatchTest
+{
+	@Test
+	public void stopWatchApp() throws MalformedURLException, InterruptedException 
+	{
+	DesiredCapabilities cap=new DesiredCapabilities();
+	cap.setCapability("deviceName","RedmiNote7Pro");
+	cap.setCapability("platformName", "android");
+	cap.setCapability("platformVersion", "9");
+	cap.setCapability("automationName", "appium");
+	cap.setCapability("appPackage", "com.android.deskclock");
+	cap.setCapability("appActivity","AlarmClock");
+	cap.setCapability("noReset","true");
+	AndroidDriver driver =new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"),cap);
+	driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+	WebElement StopWatch=driver.findElementById("com.android.deskclock:id/stopwatch");
+	driver.tap(1, StopWatch, 100);
+	WebElement start=driver.findElementByXPath("//android.widget.ImageButton[@index=1]");
+	driver.tap(1, start, 100);
+	String time=driver.findElementById("com.android.deskclock:id/time").getText();
+	System.out.println(time);
+	
+	}
+}
+============================================================================================
+OUTPUT
+
+[RemoteTestNG] detected TestNG version 6.14.3
+09:35:37.76
+PASSED: stopWatchApp
+
+===============================================
+    Default test
+    Tests run: 1, Failures: 0, Skips: 0
+===============================================
+
+
+===============================================
+Default suite
+Total tests run: 1, Failures: 0, Skips: 0
+===============================================
