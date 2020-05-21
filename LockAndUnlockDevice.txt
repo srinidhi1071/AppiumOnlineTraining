@@ -1,0 +1,51 @@
+package com.tyss.appiumproject.test;
+
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.concurrent.TimeUnit;
+
+import org.jboss.netty.util.EstimatableObjectWrapper;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.testng.annotations.Test;
+
+import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.remote.AndroidMobileCapabilityType;
+import io.appium.java_client.remote.MobileCapabilityType;
+
+public class DemoApp_10 {
+
+	@Test
+	public void tc_LockAndUnlockdevice() throws MalformedURLException, InterruptedException
+	{
+		DesiredCapabilities cap = new DesiredCapabilities();
+		cap.setCapability(MobileCapabilityType.DEVICE_NAME, "Moto E(4) Plus");
+		cap.setCapability(MobileCapabilityType.PLATFORM_NAME, "android");
+		cap.setCapability(MobileCapabilityType.PLATFORM_VERSION, 7);
+		cap.setCapability(MobileCapabilityType.AUTOMATION_NAME, "appium");
+		cap.setCapability(AndroidMobileCapabilityType.APP_PACKAGE, "com.bigbasket.mobileapp");
+		cap.setCapability(AndroidMobileCapabilityType.APP_ACTIVITY, "activity.SplashActivity");
+		cap.setCapability("noReset", true);
+		AndroidDriver driver = new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"), cap);
+		driver.manage().timeouts().implicitlyWait(1000, TimeUnit.SECONDS);
+		if(driver.isLocked())
+		{
+			System.out.println("Is the phone locked ="+driver.isLocked());
+			driver.unlockDevice();
+			System.out.println("The phone is locked ="+ driver.isLocked());
+		}
+		else
+		{
+			System.out.println("Is the app installed= "+driver.isAppInstalled("io.appium.android.apis"));
+			driver.installApp("C:\\Users\\91900\\Desktop\\ApiDemos.apk");
+			System.out.println("Is the app installed= "+driver.isAppInstalled("io.appium.android.apis"));
+			driver.startActivity("io.appium.android.apis", "ApiDemos");
+		}
+		Thread.sleep(3000);
+		driver.launchApp();
+		Thread.sleep(3000);
+		System.out.println("Is the phone unlocked before using lock device method = "+driver.isLocked());
+		Thread.sleep(3000);
+		driver.lockDevice();
+		System.out.println("Is the phone unlocked after using lock device method = "+driver.isLocked());
+	}
+}
