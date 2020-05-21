@@ -2,13 +2,13 @@ package com.Appium.ProgramsPractice;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.concurrent.TimeUnit;
 
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
 import io.appium.java_client.android.AndroidDriver;
 
-public class Tap_Program {
+public class runAppInBack {
 
 	public static void main(String[] args) throws MalformedURLException, InterruptedException 
 	{
@@ -25,13 +25,10 @@ public class Tap_Program {
 		cap.setCapability("UDID", "32004e3dbcad554b");
 		URL url=new URL("http://localhost:4723/wd/hub");
 		AndroidDriver driver=new AndroidDriver(url,cap);
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		
-		WebElement viewsMenu=driver.findElementByAccessibilityId("Views");
-	
-		Thread.sleep(2000);
-		driver.tap(1,469,1599,500);
-	
-	
+		Thread.sleep(5000);
+		driver.runAppInBackground(10);
 	}
 
 }
