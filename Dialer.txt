@@ -1,0 +1,46 @@
+package android_appTest;
+
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.concurrent.TimeUnit;
+
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.testng.annotations.Test;
+
+import io.appium.java_client.TouchAction;
+import io.appium.java_client.android.AndroidDriver;
+
+public class DialNumTest 
+{
+	@Test
+		public void dialnum() throws MalformedURLException, InterruptedException 
+		{
+		DesiredCapabilities cap=new DesiredCapabilities();
+		cap.setCapability("deviceName","RedmiNote7Pro");
+		cap.setCapability("platformName", "android");
+		cap.setCapability("platformVersion", "9");
+		cap.setCapability("automationName", "appium");
+		cap.setCapability("appPackage", "com.android.contacts");
+		cap.setCapability("appActivity","TwelveKeyDialer");
+		cap.setCapability("noReset", true);
+		cap.setCapability("uiautomator2ServerInstallTimeout",60000);
+		AndroidDriver driver =new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"),cap);
+		driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
+		//WebElement dial=driver.findElementByAccessibilityId("Phone");
+		//driver.tap(1, dial,100);
+		//TouchAction ta=new TouchAction(driver);
+	//	ta.press(dial).release().perform();
+		driver.findElementByAccessibilityId("seven").click();
+		driver.findElementByAccessibilityId("four").click();
+		driver.findElementByAccessibilityId("one").click();
+		driver.findElementByAccessibilityId("one").click();
+		driver.findElementByAccessibilityId("two").click();
+		driver.findElementByAccessibilityId("nine").click();
+		driver.findElementByAccessibilityId("zero").click();
+		driver.findElementByAccessibilityId("zero").click();
+		driver.findElementByAccessibilityId("zero").click();
+		driver.findElementByAccessibilityId("zero").click();
+		driver.findElementByAccessibilityId("Dial").click();
+	}
+}
