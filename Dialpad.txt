@@ -1,0 +1,40 @@
+package com.tyss.appiumproject.test;
+
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.concurrent.TimeUnit;
+
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.testng.annotations.Test;
+
+import io.appium.java_client.android.AndroidDriver;
+
+public class DemoApp_11 {
+
+	@Test
+	public void tc_dialPad() throws MalformedURLException, InterruptedException
+	{
+		DesiredCapabilities cap = new DesiredCapabilities();
+		cap.setCapability("deviceName", "Moto E(4) Plus");
+		cap.setCapability("platformName", "android");
+		cap.setCapability("platformVersion", 7);
+		cap.setCapability("automationName", "appium");
+		cap.setCapability("appPackage", "com.android.dialer");
+		cap.setCapability("appActivity", "CallDetailActivity");
+		cap.setCapability("noReset", true);
+		cap.setCapability("uiautomator2serverInstallTimeout", 40000);
+		AndroidDriver driver = new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"), cap);
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		WebElement dialpad = driver.findElementById("com.android.dialer:id/floating_action_button");
+		driver.tap(1, dialpad, 500);
+		WebElement one = driver.findElementById("com.android.dialer:id/one");
+		driver.tap(1, one, 100);
+		WebElement nine = driver.findElementById("com.android.dialer:id/nine");
+		driver.tap(1, nine, 100);
+		WebElement eight = driver.findElementById("com.android.dialer:id/eight");
+		driver.tap(1, eight, 100);
+		WebElement call = driver.findElementById("com.android.dialer:id/dialpad_floating_action_button");
+		driver.tap(1, call, 100);
+	}
+}
